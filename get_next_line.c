@@ -39,13 +39,12 @@ char *ft_read(int fd, char *str)
 	int rd;
 	char buffer[BUFFER_SIZE + 1];
 
-	
 	while ((rd = read(fd, buffer, BUFFER_SIZE)) > 0)
 	{
 		if (rd == 0)
 			return (0);
 		buffer[rd] = '\0';
-		if (str)
+		if (str && str[0] != '\0')
 			str = ft_strjoin(str, buffer);
 		else
 			str = ft_strjoin(ft_strdup(""), buffer);
@@ -65,7 +64,7 @@ int get_next_line(int fd, char **line)
 	{
 		*line = ft_set_line(str, *line);
 		str = ft_substr(str, ft_strlen(*line) + 1, ft_strlen(str));
-		if (str[0] == '\0')
+		if (str && str[0] == '\0')
 			free(str);
 		return (1);
 	}
@@ -73,7 +72,7 @@ int get_next_line(int fd, char **line)
 	{
 		*line = ft_set_line(str, *line);
 		str = ft_substr(str, ft_strlen(*line) + 1, ft_strlen(str));
-		if (str[0] == '\0')
+		if (str && str[0] == '\0')
 			free(str);
 		return (1);
 	}
