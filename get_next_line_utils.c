@@ -23,7 +23,7 @@ size_t	ft_strlen(const char *s)
 	return (i);
 }
 
-char	*ft_substr(const char *s, unsigned int start, size_t len)
+char	*ft_substr(char *s, unsigned int start, size_t len)
 {
 	unsigned int	i;
 	char			*tronc;
@@ -38,6 +38,7 @@ char	*ft_substr(const char *s, unsigned int start, size_t len)
 		tronc[i] = s[start + i];
 		i++;
 	}
+	free(s);
 	return (tronc);
 }
 
@@ -55,7 +56,7 @@ int	ft_strchr(const char *s, char c)
 	return (0);
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char *s1, char const *s2)
 {
 	unsigned int	i;
 	unsigned int	j;
@@ -78,39 +79,24 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		j++;
 	}
 	s[i + j] = '\0';
+	free (s1);
 	return (s);
 }
 
-char	*ft_nl(char *str)
+char	*ft_strdup(const char *src)
 {
-	unsigned int	i;
+	char	*ptr;
+	int		i;
 
 	i = 0;
-	while (str[i])
+	ptr = malloc(sizeof(*src) * (ft_strlen(src) + 1));
+	if (ptr == NULL)
+		return (0);
+	while (i < (int)ft_strlen(src))
 	{
-		if (str[i] == '\n')
-			return (ft_substr(str, 0, i));
+		ptr[i] = src[i];
 		i++;
 	}
-	return (NULL);
+	ptr[i] = '\0';
+	return (ptr);
 }
-
-/*char	**ft_nl(char *str)
-{
-	unsigned int	i;
-	char			**tab;
-
-	tab = malloc(sizeof(*tab) * 2);
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] == '\n')
-		{
-			tab[0] = ft_substr(str, 0, i);
-			tab[1] = ft_substr(str, i + 1, ft_strlen(str) - 1);
-			return (tab);
-		}
-		i++;
-	}
-	return (NULL);
-}*/

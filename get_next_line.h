@@ -19,10 +19,10 @@
 # include <unistd.h>
 
 size_t	ft_strlen(const char *s);
-char	*ft_substr(const char *s, unsigned int start, size_t len);
-char	*ft_strdup(const char *s);
-char	*ft_strjoin(char const *s1, char const *s2);
-char	*ft_nl(char *str);
+char	*ft_substr(char *s, unsigned int start, size_t len);
+char	*ft_strdup(const char *src);
+char	*ft_strjoin(char *s1, char const *s2);
+char	*ft_set_line(char const *str, char *line);
 int		get_next_line(int fd, char **line);
 int		ft_strchr(const char *s, char c);
 

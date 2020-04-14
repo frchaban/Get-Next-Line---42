@@ -13,17 +13,42 @@
 #include "get_next_line.h"
 #include <stdio.h>
 
+char	*ft_set_line(char const *str, char *line)
+{
+	unsigned int	i;
+	unsigned int	j;
+	i = 0;
+	while (str[i] && str[i] != '\n')
+		i++;
+	if (line)
+		free(line);
+	if (!(line = (char *)malloc(sizeof(*line) * (i + 1))))
+		return (NULL);
+	line[i] = '\0';
+	j = 0;
+	while (j < i)
+	{
+		line[j] = str[j];
+		j++;
+	}
+	return (line);
+}
+
 char *ft_read(int fd, char *str)
 {
 	int rd;
 	char buffer[BUFFER_SIZE + 1];
 
+	
 	while ((rd = read(fd, buffer, BUFFER_SIZE)) > 0)
 	{
 		if (rd == 0)
 			return (0);
 		buffer[rd] = '\0';
-		str = ft_strjoin(str, buffer);
+		if (str)
+			str = ft_strjoin(str, buffer);
+		else
+			str = ft_strjoin(ft_strdup(""), buffer);
 		if (ft_strchr(str, '\n'))
 			return (str);
 	}
@@ -34,18 +59,22 @@ char *ft_read(int fd, char *str)
 
 int get_next_line(int fd, char **line)
 {
-	static char *str = "";
+	static char *str;
 
-	if (ft_strchr(str, '\n'))
+	if (str && ft_strchr(str, '\n'))
 	{
-		*line = ft_nl(str);
+		*line = ft_set_line(str, *line);
 		str = ft_substr(str, ft_strlen(*line) + 1, ft_strlen(str));
+		if (str[0] == '\0')
+			free(str);
 		return (1);
 	}
 	else if ((str = ft_read(fd, str)))
 	{
-		*line = ft_nl(str);
+		*line = ft_set_line(str, *line);
 		str = ft_substr(str, ft_strlen(*line) + 1, ft_strlen(str));
+		if (str[0] == '\0')
+			free(str);
 		return (1);
 	}
 	if (str == NULL)
@@ -76,7 +105,6 @@ int	main (int argc, char **argv)
 	{
 		printf("line %d : %s\n", countline, line);
 		countline++;
-		free(line);
 	}
 	close(fd);
 	return (0);
