@@ -6,7 +6,7 @@
 /*   By: frchaban <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/27 10:36:48 by frchaban          #+#    #+#             */
-/*   Updated: 2020/03/28 13:17:13 by frchaban         ###   ########.fr       */
+/*   Updated: 2020/04/27 12:05:05 by frchaban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ char	*ft_substr(char *s, unsigned int start, size_t len)
 	return (tronc);
 }
 
-int	ft_strchr(const char *s, char c)
+int		ft_strchr(const char *s, char c)
 {
 	unsigned int i;
 
@@ -79,7 +79,7 @@ char	*ft_strjoin(char *s1, char const *s2)
 		j++;
 	}
 	s[i + j] = '\0';
-	free (s1);
+	free(s1);
 	return (s);
 }
 
