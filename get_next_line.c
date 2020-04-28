@@ -6,7 +6,7 @@
 /*   By: frchaban <frchaban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/27 10:34:40 by frchaban          #+#    #+#             */
-/*   Updated: 2020/04/28 20:05:47 by frchaban         ###   ########.fr       */
+/*   Updated: 2020/04/28 21:09:28 by frchaban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	*ft_set_line(char const *str, char *line)
 
 	i = 0;
 	if (!str)
-		return (NULL);
+		return (ft_strdup(""));
 	while (str[i] && str[i] != '\n')
 		i++;
 	if (!(line = (char *)malloc(sizeof(*line) * (i + 1))))
@@ -62,14 +62,14 @@ int		get_next_line(int fd, char **line)
 	int			flag;
 
 	flag = 0;
-	if (fd < 0 || line == NULL)
+	if (fd < 0 || line == NULL || BUFFER_SIZE <= 0)
 		return (-1);
 	if (!(str && ft_strchr(str, '\n')))
+	{
 		str = ft_read(fd, str, &flag);
-	if (str == NULL && fd != 0 && flag == 0)
-		return (-1);
-	else if (str == NULL && fd != 0 && flag == 1)
-		return (0);
+		if (str == NULL && fd != 0 && flag == 0)
+			return (-1);
+	}
 	*line = ft_set_line(str, *line);
 	str = ft_substr(str, ft_strlen(*line) + 1, ft_strlen(str));
 	if (str && str[0] == '\0')
@@ -77,8 +77,6 @@ int		get_next_line(int fd, char **line)
 		free(str);
 		str = NULL;
 	}
-	if ((fd == 0 && flag == 1) || (flag == 1 && str))
-		return (0);
 	if (flag == 0)
 		return (1);
 	return (0);
