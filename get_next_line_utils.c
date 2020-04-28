@@ -6,7 +6,7 @@
 /*   By: frchaban <frchaban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/27 10:36:48 by frchaban          #+#    #+#             */
-/*   Updated: 2020/04/28 16:45:46 by frchaban         ###   ########.fr       */
+/*   Updated: 2020/04/28 19:48:34 by frchaban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ size_t	ft_strlen(const char *s)
 	size_t i;
 
 	i = 0;
-    if (!s)
-        return (0);
+	if (!s)
+		return (0);
 	while (s[i])
 		i++;
 	return (i);
@@ -43,6 +43,7 @@ char	*ft_substr(char *s, unsigned int start, size_t len)
 		start++;
 		len--;
 	}
+	free(s);
 	str[i] = '\0';
 	return (str);
 }
@@ -52,8 +53,8 @@ int		ft_strchr(const char *s, char c)
 	unsigned int i;
 
 	i = 0;
-    if (!s)
-        return (0);
+	if (!s)
+		return (0);
 	while (i < ft_strlen(s) + 1)
 	{
 		if (s[i] == c)
