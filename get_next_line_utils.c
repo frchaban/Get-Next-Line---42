@@ -6,7 +6,7 @@
 /*   By: frchaban <frchaban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/27 10:36:48 by frchaban          #+#    #+#             */
-/*   Updated: 2020/04/28 19:48:34 by frchaban         ###   ########.fr       */
+/*   Updated: 2020/05/01 00:31:33 by frchaban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ char	*ft_substr(char *s, unsigned int start, size_t len)
 	if (!s)
 		return (NULL);
 	if (start > ft_strlen(s))
-		return (NULL);
+		len = 0;
 	if (!(str = (char *)malloc(sizeof(*str) * (len + 1))))
 		return (NULL);
 	while (s[start] && len)

@@ -6,7 +6,7 @@
 /*   By: frchaban <frchaban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/27 10:34:40 by frchaban          #+#    #+#             */
-/*   Updated: 2020/04/28 21:09:28 by frchaban         ###   ########.fr       */
+/*   Updated: 2020/05/01 01:03:20 by frchaban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ char	*ft_read(int fd, char *str, int *flag)
 			str = ft_strjoin(str, buffer);
 		else
 			str = ft_strjoin(ft_strdup(""), buffer);
-		if (ft_strchr(str, '\n'))
+		if (ft_strchr(buffer, '\n'))
 			return (str);
 	}
 	if (rd == 0)
