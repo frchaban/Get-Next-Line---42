@@ -73,6 +73,6 @@ int main(int argc, char **argv)
 		close(fd);
 
 	}
-	getchar();
+	//getchar();
 	return (0);
 }
